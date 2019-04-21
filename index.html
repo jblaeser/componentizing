@@ -29,17 +29,18 @@
           <th>Color</th>
           <th>Fluff Level <span class="sub-head">(on a scale of 1-5)</span></th>
           <th>Picture</th>
-          <th>Delete?</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="favs in cats" v-bind:class="{owned:favs.owner==='Me', kindaowned:favs.owner==='Grandma', notowned:favs.owner !== 'Me' && favs.owner!=='Grandma'}">
-          <td>{{favs.name}}</td>
-          <td>{{favs.age}}</td>
-          <td>{{favs.color}}</td>
-          <td>{{favs.fluffLevel}}</td>
-          <td><img v-bind:src="favs.picture" v-bind:alt="favs.name"></td>
-          <td><button type="button" v-on:click="deleteCat(favs)" >Delete?</button></td>
+        <tr is="fav-cats" v-for="favs in cats"
+        :name="favs.name"
+        :age="favs.age"
+        :color="favs.color"
+        :fluff-level="favs.fluffLevel"
+        :owner="favs.owner"
+        :picture="favs.picture"
+        :id="favs.id"
+        v-bind:class="{owned:favs.owner==='Me', kindaowned:favs.owner==='Grandma', notowned:favs.owner !== 'Me' && favs.owner!=='Grandma'}">
         </tr>
       </tbody>
     </table>

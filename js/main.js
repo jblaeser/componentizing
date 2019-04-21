@@ -1,3 +1,16 @@
+Vue.component("fav-cats", {
+    props: ['name', 'age', 'color', 'fluffLevel', 'owner', 'picture', 'id'],
+    template: `<tr v-bind:class="              {owned:owner==='Me', kindaowned:owner==='Grandma', notowned:owner !== 'Me' && owner!=='Grandma'}">
+        <td>{{name}}</td>
+        <td>{{age}}</td>
+        <td>{{color}}</td>
+        <td>{{fluffLevel}}</td>
+        <td><img v-bind:src="picture" v-bind:alt="name"></td>
+        </tr>`
+  });
+
+
+
 var catsArray = [{
     name: "Kissa",
     age: 7,
@@ -40,6 +53,9 @@ var catsArray = [{
     id: "osmo"
 }]
 
+
+
+
 var vueApp = new Vue({
     el: "#catList",
     data: {
@@ -81,3 +97,5 @@ var vueApp = new Vue({
         },
     }
   });
+
+
