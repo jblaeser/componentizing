@@ -1,0 +1,104 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Cat Collector's Fancy</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+ 
+  <div id="catList" v-cloak>
+    <h1>My Favorite Cats</h1>
+  
+    <table class="cats-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Color</th>
+          <th>Fluff Level <span class="sub-head">(on a scale of 1-5)</span></th>
+          <th>Picture</th>
+          <th>Delete?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="favs in cats" v-bind:class="{owned:favs.owner==='Me', kindaowned:favs.owner==='Grandma', notowned:favs.owner !== 'Me' && favs.owner!=='Grandma'}">
+          <td>{{favs.name}}</td>
+          <td>{{favs.age}}</td>
+          <td>{{favs.color}}</td>
+          <td>{{favs.fluffLevel}}</td>
+          <td><img v-bind:src="favs.picture" v-bind:alt="favs.name"></td>
+          <td><button type="button" v-on:click="deleteCat(favs)" >Delete?</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <form v-on:submit.prevent="addCat">
+      <h3>Add A New Cat!</h3>
+      <label>Name: <input type="text" v-model="nameInput"></label>
+      <label>Age: <input type="text" v-model="ageInput"></label>
+      <label>Color: <input type="text" v-model="colorInput"></label>
+      <label>Fluff Level:
+        <select name="fluffselect" id="fluff-select" v-model.number="fluffInput">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </label>
+      <label>Who owns this cat?: <input type="text" v-model="ownerInput"></label>
+      <label>Picture (must be URL link to picture): <input type="text" v-model="pictureInput"></label>
+      <label>ID: <input type="text" v-model="idInput"></label>
+      <button type="submit" v-bind:disabled="!nameInput || !ageInput || !colorInput || !fluffInput || !ownerInput || !idInput">Add This Cat!</button>
+
+
+
+    </form>
+  </div>
+  <aside class="key">
+    <div class="keyline">
+      <img src="img/blue.png" alt="my cat color">
+      <h3>My Cat</h3>
+    </div>
+    <div class="keyline">
+      <img src="img/salmon.png" alt="not my cat color">
+      <h3>Not My Cat</h3>
+    </div>
+    <div class="keyline">
+      <img src="img/green.png" alt="kinda my cat color">
+      <h3>Grandma's Cat To Whom I Am Temporarily Guardian</h3>
+    </div>
+  </aside>
+
+
+
+
+
+
+  <script src="js/vendor/modernizr-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
+  <script src="js/vue.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+</body>
+
+</html>
